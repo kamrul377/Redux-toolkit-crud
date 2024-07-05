@@ -1,0 +1,7 @@
+
+
+const doHardWord = () => { 
+    
+}
+
+doHardWord()
