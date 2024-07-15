@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { NextUIProvider } from '@nextui-org/react'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+  <>
     <Provider store={store}>
       <NextUIProvider>
         <BrowserRouter>
@@ -16,5 +16,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         </BrowserRouter>
       </NextUIProvider>
     </Provider>
-  </React.StrictMode>,
+  </>,
 )

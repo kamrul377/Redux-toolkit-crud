@@ -14,8 +14,12 @@ const todoSlice = createSlice({
             }, {
                 id: 3,
                 name: "orange"
+            }, {
+                id: 4,
+                name: "jackfruit"
             }
-        ]
+        ],
+        // selectTodo: []
     },
     reducers: {
         addTodo: (state, action) => {
@@ -40,9 +44,12 @@ const todoSlice = createSlice({
         },
         viewTodo: (state, action) => {
             console.log('view', action.payload)
-        }
+        },
+        // addToSelectTodo: (state, action) => {
+        //     state.selectTodo = state.todo.map(todo => todo.id === action.payload)
+        // }
     },
-    
+
 })
 
 export const { addTodo, deleteTodo, updateTodo, viewTodo } = todoSlice.actions

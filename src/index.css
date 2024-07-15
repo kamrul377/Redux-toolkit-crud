@@ -2,3 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.subMenu:hover{ 
+    border-bottom: 2px solid rgba(255, 68, 0, 0.808);
+}

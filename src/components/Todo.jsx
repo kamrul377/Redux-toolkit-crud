@@ -7,6 +7,7 @@ import { Card, CardFooter, Image, Button, Input } from "@nextui-org/react";
 import img from '../../public/images/img.jpg'
 import { FaEye } from 'react-icons/fa';
 import { MdDelete, MdModeEditOutline } from 'react-icons/md';
+import toast from 'react-hot-toast';
 
 const Todo = () => {
   const [name, setName] = useState('');
@@ -19,17 +20,23 @@ const Todo = () => {
 
   const handleAddOrUpdate = () => {
     if (editingId) {
+
       dispatch(updateTodo({
         id: editingId,
         name,
         // password,
       }));
     } else {
+      if (name.length === 0) {
+        return toast.error('Empty value')
+      }
+
       dispatch(addTodo({
-        id: Math.floor(Math.random(100)*99),
+        id: Math.floor(Math.random(100) * 99),
         name,
 
       }));
+      toast.success('Todo Created')
     }
     setName('');
     // setPassword('');
@@ -44,18 +51,19 @@ const Todo = () => {
 
   const handleDelete = id => {
     dispatch(deleteTodo(id));
+    toast.success(`Successfully deleted ${id}`)
   };
   const handleView = (id) => {
     navigate(`/${id}`)
   }
 
   return (
-    <div className='border m-10 w-[60%] mx-auto p-3 rounded bg-zinc-200'>
+    <div className='border m-10 w-[90%] md:w-[60%] mx-auto p-3 rounded bg-zinc-200'>
       <div>
         <p className="bg-purple-50 text-zinc-900 p-3 text-xl font-bold rounded-sm">YOUR TASKS...</p>
       </div>
       <div className="input flex gap-4 justify-center items-center my-1">
-        <Input className='text-xl' size='lg' radius='sm' color='primary' value={name} onChange={(e) => setName(e.target.value)} type="text" variant="faded" label="" placeholder="your tasks..." />
+        <Input className='text-xl' size='lg' radius='sm' color='primary' value={name} onChange={(e) => setName(e.target.value)} type="text" variant="faded" label="" placeholder="your tasks..." required />
 
 
         <Button className='' radius='sm' variant='solid' color='primary' onClick={handleAddOrUpdate}>
@@ -66,7 +74,7 @@ const Todo = () => {
       <section className=''>
         {todo?.map(todo => (
 
-          <div className='w-full bg-white my-1 px-4 py-2 rounded shadow-sm flex justify-between items-center border'>
+          <div className='w-full bg-white my-1 px-4 py-2 rounded shadow-sm flex justify-between items-center border overflow-auto'>
             <div className="text font-bold uppercase">
               {todo.id} -
               {todo.name}
